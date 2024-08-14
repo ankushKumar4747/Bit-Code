@@ -1,5 +1,7 @@
 
 
+
 module.exports={
-    connection:require("./connection")
+    connection:require("./connection"),
+    constants:require("./constants")
 }
