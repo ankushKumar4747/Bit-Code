@@ -4,8 +4,10 @@ const router=require("./routers/index")
 const server= require("http").createServer(app);
 const io = require("socket.io")(server);
 const mongoDb=require("./common/index")
+
+app.use(express.json())
 require("dotenv").config();
-app.use("/whatsapp/v1",router);
+app.use("/Bitcode/v1",router);
 
 
 app.listen(process.env.PORT,()=>{
