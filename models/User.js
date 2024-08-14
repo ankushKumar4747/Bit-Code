@@ -1,5 +1,5 @@
 const mongoose=require("mongoose");
-const { type } = require("os");
+const { Schema } = mongoose;
 const userSchema=new mongoose.Schema({
     name:{
         type:String,
@@ -39,6 +39,10 @@ const userSchema=new mongoose.Schema({
       }],
 
       jti:{
+        type:String,
+        default:''
+      },
+      otp:{
         type:String,
         default:''
       }
