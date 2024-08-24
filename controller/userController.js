@@ -32,21 +32,14 @@ module.exports.register = async (req, res) => {
                 email: req.body.email,
                 otp: otp,
                 password:hashedPassword,
-                jti:jti
-            };
-            
-            const response=await models.User.create(payload);
-            const findUser=await models.User.findOne({email:req.body.email})
 
-            const data={
-                _id:ObjectId(findUser._id),
-                jti:jti
-            }
-            const token=await auth.gettoken(data);
+            };
+            const response=await models.User.create(payload);
+            const findUser=await models.User.findOne({email:req.body.email});
             services.nodeMailer.OTPSend(req.body.email, otp)
             res.status(201).json({
                 message: constants.MESSAGES.REGISTER_SUCCESSFULLY,        
-                jwt:token,                                                                              
+                _id:ObjectId(findUser._id),                                                                   
                 succes: true,
             })
         }
