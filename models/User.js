@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 const userSchema=new mongoose.Schema({
     name:{
         type:String,
+        default:""
     },
     phoneNumber:{
         type:String,
