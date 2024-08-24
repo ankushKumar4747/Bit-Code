@@ -8,7 +8,6 @@ const mongoDb=require("./common/index")
 app.use(express.json())
 require("dotenv").config();
 app.use("/Bitcode/v1",router);
-console.log("knsdfn");
 
 
 app.listen(process.env.PORT,()=>{
