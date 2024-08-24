@@ -51,3 +51,35 @@ module.exports.register = async (req, res) => {
     }
 }
 
+module.exports.otpVerify=async(req,res)=>{
+    try {
+        Validation.User.otpVerify.validateAsync(req.body);
+        const user= await models.User.findOne({_id:req.body._id, otp:req.body.otp,isDeleted:false});
+        if(user){
+            const jti= await functions.generateRandomNumberString(25);
+            await models.User.updateOne({_id:req._id},{$set:{jti:jti}})
+            const payload = {
+                _id:user._id,
+                jti:jti
+            }
+            const token= await auth.gettoken(payload);
+            res.status(200).json({
+                message: constants.MESSAGES.OTP_VERIFY_SUCCESSFULLY,
+                succes: true,
+                token:token
+                })
+        }else{
+            res.status(400).json({
+                success: false,
+                message: constants.MESSAGES.OTP_INVALID
+        })
+        }
+
+    }catch(error){
+        res.status(400).json({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
