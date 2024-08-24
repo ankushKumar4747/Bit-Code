@@ -38,7 +38,7 @@ module.exports.register = async (req, res) => {
             const findUser=await models.User.findOne({email:req.body.email});
             services.nodeMailer.OTPSend(req.body.email, otp)
             res.status(201).json({
-                message: constants.MESSAGES.REGISTER_SUCCESSFULLY,        
+                message: constants.MESSAGES.OTP_SEND_SUCCESSFULLY,        
                 _id:ObjectId(findUser._id),                                                                   
                 succes: true,
             })
